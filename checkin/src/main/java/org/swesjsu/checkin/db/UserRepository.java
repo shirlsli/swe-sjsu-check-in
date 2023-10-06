@@ -1,8 +1,8 @@
-package org.swejsu.checkin.db;
+package org.swesjsu.checkin.db;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
-import org.swejsu.checkin.models.User;
+import org.swesjsu.checkin.models.User;
 
 public interface UserRepository extends MongoRepository<User, String> {
     

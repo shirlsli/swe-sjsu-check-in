@@ -1,4 +1,4 @@
-package org.swejsu.checkin.models;
+package org.swesjsu.checkin.models;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
