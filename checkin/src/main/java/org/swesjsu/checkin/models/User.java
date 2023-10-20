@@ -2,30 +2,39 @@ package org.swesjsu.checkin.models;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+enum PermissionStatus {
+    ADMIN,
+    NATIONALSJSU,
+    SWESJSU
+}
+
 @Document("users")
 public class User {
+    private String fullName;
+    private int points;
 
-        private String fullName;
-        private int points;
-        
-        public User(String fullName, int points) {
-            this.fullName = fullName;
-            this.points = points;
-        }
+    //private List<Event> events = new ArrayList<>();
 
-        public String getFullName() {
-            return fullName;
-        }
+    public User(String fullName, int points) {
+        this.fullName = fullName;
+        this.points = points;
+    }
 
-        public int getPoints() {
-            return points;
-        }
+    public String getFullName() {
+        return fullName;
+    }
 
-        public void setFullName(String fullName) {
-            this.fullName = fullName;
-        }
+    public int getPoints() {
+        return points;
+    }
 
-        public void setPoints(int points) {
-            this.points = points;
-        }
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+
 }
