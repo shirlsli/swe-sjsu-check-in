@@ -1,12 +1,12 @@
 package org.swesjsu.checkin.db;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
-import org.swesjsu.checkin.models.User;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
-public interface UserRepository extends MongoRepository<User, String> {
+import reactor.core.publisher.Mono;
+
+public interface UserRepository extends ReactiveMongoRepository<User, String> {
     
-    @Query("{name:'?0'}")
-    User findUserByName(String name);
-
+    @Query("{fullName : ?0}")
+    Mono<User> findUserByFullName(String fullName);
 }
