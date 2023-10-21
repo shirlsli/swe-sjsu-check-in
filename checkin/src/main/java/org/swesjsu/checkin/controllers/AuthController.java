@@ -4,8 +4,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.swesjsu.checkin.db.Event;
 import org.swesjsu.checkin.db.User;
 import org.swesjsu.checkin.db.UserRepository;
+import org.swesjsu.checkin.services.EventService;
 import org.swesjsu.checkin.services.UserService;
 
 import lombok.extern.apachecommons.CommonsLog;
@@ -25,6 +27,8 @@ public class AuthController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    EventService eventService;
 
     @GetMapping
     public Mono<Object> authenticateUser(OAuth2AuthenticationToken token) {
@@ -41,6 +45,16 @@ public class AuthController {
         error -> {
             log.error("Error while saving user: " + error.getMessage());
         });
+
+        //dummy
+        Event event = new Event("name");
+        eventService.addEvent(event).subscribe(event1 -> {
+            log.info("Event saved: " + event.getName());
+        },
+        error -> {
+            log.error("Error while saving event: " + error.getMessage());
+        });
+        
         return userService.addUserToDatabase(dummyUser).map(user -> {
             log.info("Success? " + user.getFullName() + ", " + user.getEmail());
             return token.getPrincipal().getAttributes();

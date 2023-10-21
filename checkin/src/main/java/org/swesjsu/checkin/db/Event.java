@@ -1,9 +1,10 @@
-package org.swesjsu.checkin.models;
+package org.swesjsu.checkin.db;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 
-enum eventType {
+enum EventType {
     WOW,
     EWI,
     PRODEV,
@@ -11,17 +12,28 @@ enum eventType {
     COMPANY
 }
 
-@Document("events")
+@Document("event")
 public class Event {
     LocalDateTime createdDate;
+    @Id
     String name;
     LocalDateTime date;
     String location;
-    eventType type;
+    EventType type;
     String blurb;
     int points;
 
-    public Event(String name, LocalDateTime date, String location, eventType type, String blurb, int points) {
+    public Event(String name) {
+        createdDate = LocalDateTime.now();
+        this.name = name;
+        date = createdDate;
+        location = "here";
+        type = EventType.WOW;
+        blurb = "h";
+        points = 0;
+    }
+
+    public Event(String name, LocalDateTime date, String location, EventType type, String blurb, int points) {
         createdDate = LocalDateTime.now();
         this.name = name;
         this.date = date;
@@ -47,7 +59,7 @@ public class Event {
         return location;
     }
 
-    public eventType getType() {
+    public EventType getType() {
         return type;
     }
 
@@ -71,7 +83,7 @@ public class Event {
         this.location = location;
     }
 
-    public void setType(eventType type) {
+    public void setType(EventType type) {
         this.type = type;
     }
 
