@@ -38,32 +38,31 @@ public class AuthController {
         String fullName = (String) attributes.get("name");
         String email = (String) attributes.get("email");
         User dummyUser = new User(fullName, email);
-        log.info(dummyUser.getFullName() + ", " + dummyUser.getEmail());
-        userService.addUserToDatabase(dummyUser).subscribe(user -> {
-            log.info("User saved: " + user.getFullName());
-        },
-        error -> {
-            log.error("Error while saving user: " + error.getMessage());
+        userService.checkIfValidUser(dummyUser).subscribe(user -> {
+            if (user != null) {
+                log.info("user is valid");
+            }
         });
 
-        //dummy
+        // dummy
         Event event = new Event("name");
         eventService.addEvent(event).subscribe(event1 -> {
             log.info("Event saved: " + event.getName());
         },
-        error -> {
-            log.error("Error while saving event: " + error.getMessage());
-        });
-        
+                error -> {
+                    log.error("Error while saving event: " + error.getMessage());
+                });
+
         return userService.addUserToDatabase(dummyUser).map(user -> {
             log.info("Success? " + user.getFullName() + ", " + user.getEmail());
             return token.getPrincipal().getAttributes();
         });
+
     }
 
-// https://www.baeldung.com/spring-security-5-oauth2-login
-// https://spring.io/guides/tutorials/spring-boot-oauth2/ "How to Add a Local
-// User Database" section
+    // https://www.baeldung.com/spring-security-5-oauth2-login
+    // https://spring.io/guides/tutorials/spring-boot-oauth2/ "How to Add a Local
+    // User Database" section
 
-//
+    //
 }
