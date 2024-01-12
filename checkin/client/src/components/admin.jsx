@@ -56,6 +56,13 @@ export default function Admin() {
           />
 
           <TextField
+            label="Location"
+            name="Location"
+            required
+            sx={{ marginBottom: 2 }}
+          />
+
+          <TextField
             label="Event Description"
             name="desc"
             required
