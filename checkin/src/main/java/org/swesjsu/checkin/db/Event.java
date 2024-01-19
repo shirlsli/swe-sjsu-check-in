@@ -4,14 +4,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 
-enum EventType {
-    WOW,
-    EWI,
-    PRODEV,
-    SOCIAL,
-    COMPANY
-}
-
 @Document("event")
 public class Event {
     LocalDateTime createdDate;

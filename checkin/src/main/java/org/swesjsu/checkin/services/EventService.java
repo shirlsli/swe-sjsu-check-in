@@ -3,6 +3,7 @@ package org.swesjsu.checkin.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.swesjsu.checkin.db.Event;
 import org.swesjsu.checkin.db.EventRepository;
 

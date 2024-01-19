@@ -11,6 +11,42 @@ import {
 } from "@mui/material";
 
 export default function Admin() {
+  const [eventName, setEventName] = React.useState("");
+  const [eventDate, setEventDate] = React.useState("");
+  // const [eventLocation, setEventLocation] = React.useState("");
+  const [eventBlurb, setEventBlurb] = React.useState("");
+  const [eventPoints, setEventPoints] = React.useState("");
+  const [eventRSVP, setEventRSVP] = React.useState("");
+  const [eventType, setEventType] = React.useState("wow");
+  
+  async function addEvent() {
+    fetch(
+      "http://localhost:8080/addEvent?eventName=" +
+      eventName +
+      "&eventDate=" +
+      eventDate +
+      // "&eventLocation=" +
+      // eventLocation.current.value +
+      "&eventBlurb=" +
+      eventBlurb +
+      "&eventPoints=" +
+      eventPoints +
+      "&eventRSVP=" +
+      eventRSVP +
+      "&eventType=" +
+      eventType
+    )
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Process the fetched data
+      console.log(data);
+    });
+  }
   return (
     <Container>
       <Box
@@ -35,11 +71,12 @@ export default function Admin() {
             name="name"
             required
             sx={{ marginBottom: 2 }}
+            onChange={(e) => setEventName(e.target.value)}
           />
 
           <FormControl fullWidth sx={{ marginBottom: 2 }}>
             <InputLabel id="type-label">Choose an event type:</InputLabel>
-            <Select labelId="type-label" id="type" name="types">
+            <Select labelId="type-label" id="type" name="types" value={eventType} onChange={(e) => setEventType(e.target.value)}>
               <MenuItem value="wow">WOW</MenuItem>
               <MenuItem value="ewi">EWI</MenuItem>
               <MenuItem value="prodev">PRODEV</MenuItem>
@@ -52,12 +89,14 @@ export default function Admin() {
             type="date"
             id="date"
             name="date"
+            onChange={(e) => setEventDate(e.target.value)}
             sx={{ marginBottom: 2 }}
           />
 
           <TextField
             label="Event Description"
             name="desc"
+            onChange={(e) => setEventBlurb(e.target.value)}
             required
             multiline
             rows={4}
@@ -69,6 +108,7 @@ export default function Admin() {
             type="number"
             id="points"
             name="points"
+            onChange={(e) => setEventPoints(e.target.value)}
             required
             sx={{ marginBottom: 2 }}
           />
@@ -78,6 +118,7 @@ export default function Admin() {
             type="number"
             id="rsvp"
             name="rsvp"
+            onChange={(e) => setEventRSVP(e.target.value)}
             required
             sx={{ marginBottom: 2 }}
           />
@@ -93,6 +134,7 @@ export default function Admin() {
             type="submit"
             variant="contained"
             sx={{ alignSelf: "flex-end" }}
+            onClick={addEvent}
           >
             Submit
           </Button>
