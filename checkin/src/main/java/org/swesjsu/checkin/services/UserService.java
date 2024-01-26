@@ -25,4 +25,9 @@ public class UserService {
                     return Mono.error(new RuntimeException("User already exists."));
                 });
     }
+
+    public Mono<User> checkIfValidUser(User user) {
+        return userRepository.findById(user.getEmail());
+
+    }
 }
