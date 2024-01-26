@@ -4,39 +4,23 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 
-enum EventType {
-    WOW,
-    EWI,
-    PRODEV,
-    SOCIAL,
-    COMPANY
-}
-
 @Document("event")
 public class Event {
     LocalDateTime createdDate;
     @Id
     String name;
-    LocalDateTime date;
+    LocalDateTime start;
+    LocalDateTime end;
     String location;
     EventType type;
     String blurb;
     int points;
 
-    public Event(String name) {
+    public Event(String name, LocalDateTime start, LocalDateTime end, String location, EventType type, String blurb, int points) {
         createdDate = LocalDateTime.now();
         this.name = name;
-        date = createdDate;
-        location = "here";
-        type = EventType.WOW;
-        blurb = "h";
-        points = 0;
-    }
-
-    public Event(String name, LocalDateTime date, String location, EventType type, String blurb, int points) {
-        createdDate = LocalDateTime.now();
-        this.name = name;
-        this.date = date;
+        this.start = start;
+        this.end = end;
         this.location = location;
         this.type = type;
         this.blurb = blurb;
@@ -51,8 +35,12 @@ public class Event {
         return name;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDateTime getStartDate() {
+        return start;
+    }
+
+    public LocalDateTime getEndDate() {
+        return end;
     }
 
     public String getLocation() {
@@ -75,8 +63,12 @@ public class Event {
         this.name = name;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setStartDate(LocalDateTime date) {
+        this.start = date;
+    }
+
+    public void setEndDate(LocalDateTime date) {
+        this.end = date;
     }
 
     public void setLocation(String location) {

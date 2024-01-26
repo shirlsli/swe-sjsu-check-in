@@ -8,9 +8,48 @@ import {
   InputLabel,
   FormControl,
   Button,
+  Typography,
 } from "@mui/material";
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import dayjs from 'dayjs';
+
 
 export default function Admin() {
+  const [eventName, setEventName] = React.useState("");
+  const [eventStartDateTime, setEventStartDateTime] = React.useState(dayjs());
+  const [eventEndDateTime, setEventEndDateTime] = React.useState(dayjs());
+  const [eventLocation, setEventLocation] = React.useState("");
+  const [eventBlurb, setEventBlurb] = React.useState("");
+  const [eventPoints, setEventPoints] = React.useState("");
+  const [eventRSVP, setEventRSVP] = React.useState("");
+  const [eventType, setEventType] = React.useState("wow");
+  const dateTimeFormat = "MM-D-YYYY h:mm A";
+
+  async function addEvent() {
+    fetch(
+      "http://localhost:8080/addEvent?eventName=" +
+        eventName +
+        "&eventStartDateTime=" +
+        dayjs(eventStartDateTime).format(dateTimeFormat) +
+        "&eventEndDateTime=" +
+        dayjs(eventEndDateTime).format(dateTimeFormat) +
+        "&eventLocation=" +
+        eventLocation +
+        "&eventBlurb=" +
+        eventBlurb +
+        "&eventPoints=" +
+        eventPoints +
+        "&eventRSVP=" +
+        eventRSVP +
+        "&eventType=" +
+        eventType
+    ).then((response) => {
+      console.log(response.json());
+    });
+  }
+  
   return (
     <Container>
       <Box
@@ -35,36 +74,67 @@ export default function Admin() {
             name="name"
             required
             sx={{ marginBottom: 2 }}
+            onChange={(e) => setEventName(e.target.value)}
           />
 
-          <FormControl fullWidth sx={{ marginBottom: 2 }}>
-            <InputLabel id="type-label">Choose an event type:</InputLabel>
-            <Select labelId="type-label" id="type" name="types">
-              <MenuItem value="wow">WOW</MenuItem>
-              <MenuItem value="ewi">EWI</MenuItem>
-              <MenuItem value="prodev">PRODEV</MenuItem>
-              <MenuItem value="social">SOCIAL</MenuItem>
-              <MenuItem value="company">COMPANY</MenuItem>
-            </Select>
-          </FormControl>
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              gap: 2,
+              alignItems: "center",
+            }}
+          >
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DateTimePicker sx={{ marginBottom: 2 }} label="Start Date and Time" value={eventStartDateTime} onChange={(e) => { setEventStartDateTime(e)}}/>
+            </LocalizationProvider>
 
-          <TextField
-            type="date"
-            id="date"
-            name="date"
-            sx={{ marginBottom: 2 }}
-          />
+            <Typography variant="body1" sx={{ marginBottom: 2 }}>
+              -
+            </Typography>
 
-          <TextField
-            label="Location"
-            name="Location"
-            required
-            sx={{ marginBottom: 2 }}
-          />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DateTimePicker sx={{ marginBottom: 2 }} label="End Date and Time" value={eventEndDateTime} onChange={(e) => { setEventEndDateTime(e)}}/>
+            </LocalizationProvider>
+          </Box>
+
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              gap: 2,
+              alignItems: "center",
+            }}
+          >
+            <FormControl sx={{ width: "50%", marginBottom: 2 }}>
+              <InputLabel id="type-label">Choose an event type:</InputLabel>
+              <Select
+                labelId="type-label"
+                id="type"
+                name="types"
+                value={eventType}
+                onChange={(e) => setEventType(e.target.value)}
+              >
+                <MenuItem value="wow">WOW</MenuItem>
+                <MenuItem value="ewi">EWI</MenuItem>
+                <MenuItem value="prodev">PRODEV</MenuItem>
+                <MenuItem value="social">SOCIAL</MenuItem>
+                <MenuItem value="company">COMPANY</MenuItem>
+              </Select>
+            </FormControl>
+
+            <TextField
+              label="Location"
+              onChange={(e) => setEventLocation(e.target.value)}
+              required
+              sx={{ marginBottom: 2 }}
+            />
+          </Box>
 
           <TextField
             label="Event Description"
             name="desc"
+            onChange={(e) => setEventBlurb(e.target.value)}
             required
             multiline
             rows={4}
@@ -76,6 +146,7 @@ export default function Admin() {
             type="number"
             id="points"
             name="points"
+            onChange={(e) => setEventPoints(e.target.value)}
             required
             sx={{ marginBottom: 2 }}
           />
@@ -85,6 +156,7 @@ export default function Admin() {
             type="number"
             id="rsvp"
             name="rsvp"
+            onChange={(e) => setEventRSVP(e.target.value)}
             required
             sx={{ marginBottom: 2 }}
           />
@@ -100,6 +172,7 @@ export default function Admin() {
             type="submit"
             variant="contained"
             sx={{ alignSelf: "flex-end" }}
+            onClick={addEvent}
           >
             Submit
           </Button>
