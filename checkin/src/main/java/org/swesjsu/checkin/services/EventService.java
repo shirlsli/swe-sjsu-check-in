@@ -26,10 +26,10 @@ public class EventService {
                 });
     }
 
-    public Mono<List<Event>> getAllEvent() {
+    public Mono<List<Event>> getAllEvents() {
         LocalDateTime currentDateTime = LocalDateTime.now();
         return eventRepository.findAll()
-                .filter(event -> event.getCreatedDate().isAfter(currentDateTime))
+                // .filter(event -> event.getCreatedDate().isAfter(currentDateTime))
                 .collectList();
     }
     // make method for retrieving all of the upcoming events from the database

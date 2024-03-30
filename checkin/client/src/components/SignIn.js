@@ -1,7 +1,7 @@
-import logo from './logo.svg';
-import './App.css';
-import Event from './components/event.jsx';
-import Admin from './components/admin.jsx';
+//import logo from './logo.svg';
+// import './App.css';
+import Event from './event.jsx';
+import Admin from './admin.jsx';
 import React from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import { BrowserRouter } from 'react-router-dom';
