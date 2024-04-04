@@ -6,7 +6,7 @@ import SideMenu from './components/side-menu.jsx';
 import { useEffect } from 'react'
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { gapi } from 'gapi-script';
-import SignIn from "./SignIn.js";
+import SignIn from "./components/sign-in.jsx";
 //gotta find the env GOOGLE_CLIENT_ID eventually but for now it doesn't work so i'm using it straight up
 const clientID = "307866176371-26rvthknep9u5catqt0huccs3v4tn70c.apps.googleusercontent.com";
 function App() {
@@ -23,7 +23,7 @@ function App() {
   return (
     <div className="App">
       <GoogleOAuthProvider clientId={clientID}> 
-        <SignIn></SignIn>
+        <SignIn />
       </GoogleOAuthProvider>
     </div>
     // <div className="App">
