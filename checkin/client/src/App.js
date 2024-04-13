@@ -21,14 +21,14 @@ function App() {
     gapi.load('client:auth2', start);
   })
   return (
-    <div className="App">
-      <GoogleOAuthProvider clientId={clientID}> 
-        <SignIn />
-      </GoogleOAuthProvider>
-    </div>
     // <div className="App">
-    //   <SideMenu />
+    //   <GoogleOAuthProvider clientId={clientID}> 
+    //     <SignIn />
+    //   </GoogleOAuthProvider>
     // </div>
+    <div className="App">
+      <SideMenu />
+    </div>
   );
 }
 
