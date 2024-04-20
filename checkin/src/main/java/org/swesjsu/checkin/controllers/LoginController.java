@@ -22,23 +22,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/")
 public class LoginController {
-   @Autowired
-   UserService userService;
-
-   @GetMapping("/authenticateUser")
-   public void authenticateUser(@RequestParam(name = "clientEmail", defaultValue = "") String email) {
+    @Autowired
+    UserService userService;
+    
+    @GetMapping("/authenticateUser")
+    public void authenticateUser(@RequestParam(name = "fullName", defaultValue = "") String fullName,
+            @RequestParam(name = "clientEmail", defaultValue = "") String email) {
+        System.out.println(fullName);
         System.out.println(email);
-       Mono<User> user = userService.checkIfValidUser(email);
-       if(user != null) {
-           System.out.println("user exists");
-           //do something for them
-           //admin? check permission status (enum in user.java file)
-           //manually assign admin; if somebody signs in first time, assign swesjsu
-       } else {
-           System.out.println("user does not exist");
-           //add them to db
-           //already exists a "add user to database" function for UserService
-       }
+        Mono<User> user = userService.checkIfValidUser(email);
+        if(user == null) {
+            System.out.println("user does not exist");
+            User u = new User(fullName, email);
+            userService.addUserToDatabase(u);
+        }
+        System.out.println("user exists");
+        //return user;
    }
 }
 

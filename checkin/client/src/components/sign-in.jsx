@@ -6,17 +6,20 @@ import { jwtDecode } from "jwt-decode"; //jwtDecode for decoding the credentials
 export default function signIn() {
     const clientID = "307866176371-26rvthknep9u5catqt0huccs3v4tn70c.apps.googleusercontent.com";
     var clientEmail = "";
+    var clientName = "";
     console.log("Signing in...");
 
     const authenticateUser = (res) => {
         const decode = jwtDecode(res?.credential);
         console.log("Success! Current user: ", decode);
+        clientName = decode.name;
         clientEmail = decode.email; //how you get one portion of it
-        console.log(typeof(clientEmail));
         console.log("email is: ", clientEmail);
         console.log("Checking user in db...")
         fetch(
-            "http://localhost:8080/authenticateUser?clientEmail=" +
+            "http://localhost:8080/authenticateUser?clientName=" +
+            clientName + 
+            "&clientEmail=" +
             clientEmail
         ).then((response) => {
             //console.log(response.json());
