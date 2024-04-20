@@ -49,14 +49,14 @@ public class EventController {
     public Mono<List<Event>> getAllEvents() {
         Mono<List<Event>> monoList = eventService.getAllEvents(); // Your Mono<List<Event>> object
 
-        // Use flatMap to convert Mono<List<Event>> to Flux<Event>
-        // Flux<Event> eventFlux = monoList.flatMapMany(Flux::fromIterable);
+        //Use flatMap to convert Mono<List<Event>> to Flux<Event>
+        Flux<Event> eventFlux = monoList.flatMapMany(Flux::fromIterable);
 
-        // // Now you can work with the Flux<Event> stream
-        // eventFlux.subscribe(event -> {
-        //     // Handle each event here
-        //     log.info(event.getName());
-        // });
+        // Now you can work with the Flux<Event> stream
+        eventFlux.subscribe(event -> {
+            // Handle each event here
+            log.info(event.getName());
+        });
         return monoList;
     }
 }
