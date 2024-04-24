@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 enum PermissionStatus {
     ADMIN,
-    NATIONALSJSU,
+    NATIONALSWE,
     SWESJSU
 }
 
