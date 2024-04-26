@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-CheckinApplication<checkin>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "org.swesjsu.checkin.CheckinApplication",
+            "projectName": "checkin",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
