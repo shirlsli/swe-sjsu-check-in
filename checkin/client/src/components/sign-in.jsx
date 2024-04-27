@@ -1,9 +1,11 @@
 import React from "react"
 import Box from '@mui/material/Box';
+import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode"; //jwtDecode for decoding the credentials received when a user logs in
 
-export default function signIn() {
+export default function SignIn() {
+    const navigate = useNavigate();
     const clientID = "307866176371-26rvthknep9u5catqt0huccs3v4tn70c.apps.googleusercontent.com";
     var clientEmail = "";
     var clientName = "";
@@ -22,8 +24,13 @@ export default function signIn() {
             "&clientEmail=" +
             clientEmail
         ).then((response) => {
-            //console.log(response.json());
-        });
+            return response.json(); 
+      }).then((data) => {
+        console.log(data);
+        navigate("/home");
+      }).catch((error) => {
+        console.log("Non-sjsu emails not accepted");
+      });
     }
 
     const onFailure = (res) => {

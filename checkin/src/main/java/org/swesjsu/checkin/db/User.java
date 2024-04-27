@@ -23,6 +23,11 @@ public class User {
 
     // private List<Event> events = new ArrayList<>();
 
+    // DO NOT DELETE: MongoDB Atlas requires an empty constructor!!!
+    public User() {
+        
+    }
+
     public User(String fullName, String email) {
         this.fullName = fullName;
         this.email = email;
