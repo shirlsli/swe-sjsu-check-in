@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 
 export default function Dashboard() {
   const [events, setEvents] = useState([]);
+
   async function getAllEvents() {
     fetch("http://localhost:8080/getAllEvents")
       .then((response) => {
@@ -24,8 +25,8 @@ export default function Dashboard() {
 
   return (
     <div>
-      <SideMenu />
-      {events.map((event) => (
+      <SideMenu page="dashboard" />
+      {events.map((event, idx) => (
         <Event
           blurb={event.blurb}
           createdDate={event.createdDate}

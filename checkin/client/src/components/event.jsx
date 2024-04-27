@@ -4,9 +4,8 @@ export default function Event({
     blurb, createdDate, endDate, location, name, points, startDate, type
 }) {
     
-
     return (<div>
-        <div class="headline"> 
+        <div> 
             <p>{blurb}</p>
             <p>{createdDate}</p>
             <p>{endDate}</p>
