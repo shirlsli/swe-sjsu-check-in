@@ -62,5 +62,11 @@ public class User {
         this.points = points;
     }
 
+    public PermissionStatus getPermissionStatus() {
+        return this.permission;
+    }
 
+    public void setPermission(PermissionStatus permissionStatus) {
+        this.permission = permissionStatus;
+    }
 }
