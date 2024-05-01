@@ -1,10 +1,14 @@
 import React from "react"
+import { useState, useEffect } from "react";
 import Box from '@mui/material/Box';
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode"; //jwtDecode for decoding the credentials received when a user logs in
+import { useNavigate } from "react-router-dom";
 
-export default function signIn() {
+export default function SignIn() {
     const clientID = "307866176371-26rvthknep9u5catqt0huccs3v4tn70c.apps.googleusercontent.com";
+    const navigate = useNavigate();
+    const [isLoggedin, setIsLoggedin] = useState(false);
     var clientEmail = "";
     var clientName = "";
     console.log("Signing in...");
@@ -22,24 +26,34 @@ export default function signIn() {
             "&clientEmail=" +
             clientEmail
         ).then((response) => {
-            //console.log(response.json());
+            console.log("Checking response...");
+            console.log(response);
         });
+        setIsLoggedin(true);
     }
 
     const onFailure = (res) => {
         console.log("Fail! ", res);
     }
 
+    useEffect(() => {
+        if (isLoggedin) {
+          navigate("/dashboard");
+        }
+    }, [isLoggedin, navigate]);
+
     return(
-        <Box id="signinButton">
-            <GoogleLogin
-                clientID={clientID}
-                buttonText="Login"
-                onSuccess={authenticateUser}
-                onFailure={onFailure}
-                cookiePolicy={'single_host_origin'}
-                isSignedIn={true}
-            />
-        </Box>
+        <GoogleOAuthProvider clientId={clientID}> 
+            <Box id="signinButton">
+                <GoogleLogin
+                        clientID={clientID}
+                        buttonText="Login"
+                        onSuccess={authenticateUser}
+                        onFailure={onFailure}
+                        cookiePolicy={'single_host_origin'}
+                        isSignedIn={true}
+                />
+            </Box>
+        </GoogleOAuthProvider>
     )
 }
