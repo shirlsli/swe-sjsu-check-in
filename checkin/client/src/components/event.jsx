@@ -1,12 +1,19 @@
-import React from "react"
+import React, { useState } from "react"
 
-export default function Event() {
+export default function Event({
+    blurb, createdDate, endDate, location, name, points, startDate, type
+}) {
+    
     return (<div>
-        <div class="headline">
-            <p>Points</p>
-            <a href="">Event Name</a>
-            <p>Date</p>
-            <p>Location</p>
+        <div> 
+            <p>{blurb}</p>
+            <p>{createdDate}</p>
+            <p>{endDate}</p>
+            <p>{location}</p>
+            <p>{name}</p>
+            <p>{points}</p>
+            <p>{startDate}</p>
+            <p>{type}</p>
         </div>
     </div>)
 }

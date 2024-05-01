@@ -23,6 +23,11 @@ public class User {
 
     // private List<Event> events = new ArrayList<>();
 
+    // DO NOT DELETE: MongoDB Atlas requires an empty constructor!!!
+    public User() {
+        
+    }
+
     public User(String fullName, String email) {
         this.fullName = fullName;
         this.email = email;
@@ -57,5 +62,11 @@ public class User {
         this.points = points;
     }
 
+    public PermissionStatus getPermissionStatus() {
+        return this.permission;
+    }
 
+    public void setPermission(PermissionStatus permissionStatus) {
+        this.permission = permissionStatus;
+    }
 }

@@ -27,7 +27,7 @@ public class UserService {
     }
 
     public Mono<User> checkIfValidUser(String email) {
-        return userRepository.findById(email);
-
+        log.info("heehee: " + email);
+        return userRepository.findUserByEmail(email);
     }
 }

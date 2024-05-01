@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Box, Container } from "@mui/material";
 import profilePic from "../images/avatar.jpg";
+import SideMenu from "./side-menu";
 
 export default function Profile() {
   const ProfileContainer = styled.div`
@@ -29,31 +30,34 @@ export default function Profile() {
   `;
 
   return (
-    <ProfileContainer>
-      <Box
-        sx={{
-          width: "240px",
-          height: "240px", //why its not the same as width i have no idea
-          borderRadius: "50%",
-          overflow: "hidden",
-        }}
-      >
-        <img
-          src={profilePic}
-          alt="profile"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
+    <div>
+      <SideMenu page="profile" />
+      <ProfileContainer>
+        <Box
+          sx={{
+            width: "240px",
+            height: "240px", //why its not the same as width i have no idea
+            borderRadius: "50%",
+            overflow: "hidden",
           }}
-        />
-      </Box>
-      <TextContainer>
-        <StyledText>Shu Saw</StyledText>
-        <StyledText>Email</StyledText>
-        <StyledText>Type of Member</StyledText>
-        <StyledText>Points: </StyledText>
-      </TextContainer>
-    </ProfileContainer>
+        >
+          <img
+            src={profilePic}
+            alt="profile"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
+        </Box>
+        <TextContainer>
+          <StyledText>Shu Saw</StyledText>
+          <StyledText>Email</StyledText>
+          <StyledText>Type of Member</StyledText>
+          <StyledText>Points: </StyledText>
+        </TextContainer>
+      </ProfileContainer>
+    </div>
   );
 }

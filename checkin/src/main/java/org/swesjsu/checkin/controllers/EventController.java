@@ -2,6 +2,7 @@ package org.swesjsu.checkin.controllers;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.swesjsu.checkin.db.Event;
 import org.swesjsu.checkin.services.EventService;
 import org.swesjsu.checkin.db.EventType;
+
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import lombok.extern.apachecommons.CommonsLog;
@@ -42,4 +45,21 @@ public class EventController {
                 Integer.parseInt(points));
         return eventService.addEvent(event);
     }
+     @GetMapping("/getAllEvents")
+    public Mono<List<Event>> getAllEvents() {
+        Mono<List<Event>> monoList = eventService.getAllEvents(); // Your Mono<List<Event>> object
+
+        //Use flatMap to convert Mono<List<Event>> to Flux<Event>
+        Flux<Event> eventFlux = monoList.flatMapMany(Flux::fromIterable);
+
+        // Now you can work with the Flux<Event> stream
+        eventFlux.subscribe(event -> {
+            // Handle each event here
+            log.info(event.getName());
+        });
+        return monoList;
+    }
 }
+
+
+

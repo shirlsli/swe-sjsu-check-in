@@ -9,4 +9,8 @@ public interface UserRepository extends ReactiveMongoRepository<User, String> {
     
     @Query("{fullName : ?0}")
     Mono<User> findUserByFullName(String fullName);
+
+    @Query("{_id : ?0}")
+    Mono<User> findUserByEmail(String email);
+    
 }
