@@ -99,7 +99,7 @@ export default function SideMenu({ page }) {
         >
           <Box
             sx={{
-              backgroundColor: page == "dashboard" ? "#dedaed" : "#ffffff",
+              backgroundColor: page === "dashboard" ? "#dedaed" : "#ffffff",
               borderRadius: "10px",
               ml: 2,
               mr: 2,
@@ -115,12 +115,13 @@ export default function SideMenu({ page }) {
                 display: "flex",
                 alignItems: "center",
                 pl: 2,
+                borderRadius: "10px"
               }}
             >
-              <ListItemIcon sx={{ minWidth: 24, mr: 2 }}>
-                <HomeIcon sx={{ color: "#5A5377", width: 24, height: 24 }} />
+              <ListItemIcon sx={{ minWidth: 24, mr: 0.5 }}>
+                <HomeIcon sx={{ color: "#5A5377", width: 15, height: 15 }} />
               </ListItemIcon>
-              <Typography sx={{ fontWeight: "bold", fontSize: "0.9rem" }}>
+              <Typography sx={{ fontWeight: "bold", fontSize: "0.6rem" }}>
                 Dashboard
               </Typography>
             </ListItem>
@@ -137,7 +138,7 @@ export default function SideMenu({ page }) {
         >
           <Box
             sx={{
-              backgroundColor: page == "profile" ? "#dedaed" : "#ffffff",
+              backgroundColor: page === "profile" ? "#dedaed" : "#ffffff",
               borderRadius: "10px",
               ml: 2,
               mr: 2,
@@ -154,55 +155,57 @@ export default function SideMenu({ page }) {
                 alignItems: "center",
                 pl: 2,
                 pb: 1,
+                borderRadius: "10px"
               }}
             >
-              <ListItemIcon sx={{ minWidth: 24, mr: 2 }}>
-                <AccountCircleIcon sx={{ color: "#5A5377", width: 24, height: 24 }} />
+              <ListItemIcon sx={{ minWidth: 24, mr: 0.5 }}>
+                <AccountCircleIcon sx={{ color: "#5A5377", width: 15, height: 15 }} />
               </ListItemIcon>
-              <Typography sx={{ fontWeight: "bold", fontSize: "0.9rem" }}>
+              <Typography sx={{ fontWeight: "bold", fontSize: "0.6rem" }}>
                 Profile
               </Typography>
             </ListItem>
           </Box>
         </Link>
         <Box sx={{ height: "10px" }} /> {/*puts space between the links*/}
-          <Box
+        <Box
+          sx={{
+            ml: 2,
+            mr: 2,
+          }}
+          onClick={handleLogout}
+        >
+          <ListItem
+            button
+            component="a"
+            href="#logout-section"
             sx={{
-              ml: 2,
-              mr: 2,
+              textDecoration: "none",
+              color: "#5A5377",
+              display: "flex",
+              alignItems: "center",
+              pl: 2.25,
+              pb: 1,
+              borderRadius: "10px"
             }}
-            onClick={handleLogout}
           >
-            <ListItem
-              button
-              component="a"
-              href="#logout-section"
-              sx={{
-                textDecoration: "none",
-                color: "#5A5377",
-                display: "flex",
-                alignItems: "center",
-                pl: 2.25,
-                pb: 1,
-              }}
-            >
-              <ListItemIcon sx={{ minWidth: 24, mr: 2 }}>
-                <LogoutIcon sx={{ color: "#5A5377", width: 24, height: 24 }} />
-              </ListItemIcon>
-              <Typography sx={{ fontWeight: "bold", fontSize: "0.9rem" }}>
-                Logout
-              </Typography>
-            </ListItem>
-          </Box>
+            <ListItemIcon sx={{ minWidth: 24, mr: 0.5 }}>
+              <LogoutIcon sx={{ color: "#5A5377", width: 15, height: 15 }} />
+            </ListItemIcon>
+            <Typography sx={{ fontWeight: "bold", fontSize: "0.6rem" }}>
+              Logout
+            </Typography>
+          </ListItem>
+        </Box>
       </List>
-      <div style={{ position: "absolute", bottom: 0, zIndex: 1 }}>
-        <Lottie
-          options={defaultOptions}
-          isClickToPauseDisabled={true}
-          height={400}
-          width={400}
-        />
-      </div>
+      {/* <div style={{ position: "absolute", bottom: 0 }}>
+            <Lottie
+              options={defaultOptions}
+              isClickToPauseDisabled={true}
+              height={400}
+              width={400}
+            />
+          </div> */}
       <Box
         sx={{
           position: "absolute",
@@ -212,10 +215,8 @@ export default function SideMenu({ page }) {
           alignItems: "center",
           width: "100%",
           // backgroundColor: "#c2bae3",
-          // borderTopLeftRadius: 5,
-          // borderTopRightRadius: 5
           pb: 1,
-          zIndex: 2,
+          // zIndex: 2,
         }}
       >
         <List sx={{ display: "flex", justifyContent: "center" }}>
@@ -228,7 +229,7 @@ export default function SideMenu({ page }) {
             <ListItemIcon
               sx={{ display: "flex", justifyContent: "center", pl: 1, pr: 1 }}
             >
-              <DiscordIcon sx={{ color: "#5A5377" }} />
+              <DiscordIcon sx={{ color: "#5A5377", width: 15, height: 15 }} />
             </ListItemIcon>
           </Link>
           <Link
@@ -240,7 +241,7 @@ export default function SideMenu({ page }) {
             <ListItemIcon
               sx={{ display: "flex", justifyContent: "center", pl: 1, pr: 1 }}
             >
-              <InstagramIcon sx={{ color: "#5A5377" }} />
+              <InstagramIcon sx={{ color: "#5A5377", width: 15, height: 15 }} />
             </ListItemIcon>
           </Link>
           <Link
@@ -252,7 +253,7 @@ export default function SideMenu({ page }) {
             <ListItemIcon
               sx={{ display: "flex", justifyContent: "center", pl: 1, pr: 1 }}
             >
-              <LinkedInIcon sx={{ color: "#5A5377" }} />
+              <LinkedInIcon sx={{ color: "#5A5377", width: 15, height: 15 }} />
             </ListItemIcon>
           </Link>
         </List>
